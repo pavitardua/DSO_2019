@@ -1,9 +1,9 @@
 <template>
   <div id='app' class='container'>
     <div class='page-header'>
-      <h1>Vue.js 2 & Firebase <small></small></h1>
+      <h3 class='panel-title'>Sewadal List</h3> <router-link to="/Entry" class="text_medium theme_color font_weight300 theme_colorHover">Attendance</router-link>
     </div>
-    <div class='panel panel-default'>
+    <!-- <div class='panel panel-default'>
       <div class='panel-heading'>
         <h3 class='panel-title'>Add New Sewadals</h3>
       </div>
@@ -11,47 +11,46 @@
          <form id='form' class='form-inline' v-on:submit.prevent='addSewadal'>
           <div class='form-group'>
             <label for='sewadalPNO'>Personal No:</label>
-            <input type='text' id='sewadalPNO' class='form-control' v-model='newSewadal.personalNumber'>
+            <input type='text' id='sewadalPNO' class='form-control' v-model='newSewadal.personal_no'>
           </div>
           <div class='form-group'>
             <label for='sewadalFNAME'>First Name:</label>
-            <input type='text' id='sewadalFNAME' class='form-control' v-model='newSewadal.firstName'>
+            <input type='text' id='sewadalFNAME' class='form-control' v-model='newSewadal.first_name'>
           </div>
           <div class='form-group'>
             <label for='sewadalMNAME'>Middle Name:</label>
-            <input type='text' id='sewadalMNAME' class='form-control' v-model='newSewadal.middleName'>
+            <input type='text' id='sewadalMNAME' class='form-control' v-model='newSewadal.middle_name'>
           </div>
           <div class='form-group'>
             <label for='sewadalLNAME'>Last Name:</label>
-            <input type='text' id='sewadalLNAME' class='form-control' v-model='newSewadal.lastName'>
+            <input type='text' id='sewadalLNAME' class='form-control' v-model='newSewadal.last_name'>
           </div>
           <input type='submit' class='btn btn-primary' value='Add Sewadal'>
         </form>
       </div>
-    </div>
-    <div class='panel panel-default'>
-      <div class='panel-heading'>
-        <h3 class='panel-title'>Sewadal List</h3>
-      </div>
-      <div class='panel-body'>
-        <table class='table table-striped'>
-          <thead>
+    </div> -->
+    <!-- <div class='panel panel-default'> -->
+
+      <div >
+        <b-table striped hover :items="sewadals" :fields="fields" />
+          <!-- <thead>
             <tr>
-              <th>Personal Number</th>
+              <th>Serial Number </th>
+              <th>Personal Number </th>
               <th>Name</th>
               <th></th>
             </tr>
           </thead>
           <tbody>
-            <tr v-for='sewadal in sewadals' :key=sewadal.personalNumber>
-              <td><a >{{sewadal.personalNumber}}</a></td>
-              <td>{{sewadal.firstName}} {{sewadal.middleName}} {{sewadal.lastName}}</td>
+            <tr v-for='(sewadal, i) in sewadals' :key="`${i}-${sewadal.personal_no}`">
+              <td>{{i}}</td>
+              <td>{{sewadal.personal_no}}</td>
+              <td>{{sewadal.first_name}} {{sewadal.middle_name}} {{sewadal.last_name}}</td>
               <td><span class='glyphicon glyphicon-trash' aria-hidden='true' v-on:click='removeSewadal(sewadal)'></span></td>
             </tr>
-          </tbody>
-        </table>
+          </tbody> -->
       </div>
-    </div>
+    <!-- </div> -->
   </div>
 </template>
 
@@ -77,13 +76,28 @@ export default {
   firebase: {
     sewadals: sewadalsRef,
   },
+
   data() {
     return {
+      fields: {
+          first_name: {
+            label: 'First name',
+            sortable: true
+          },
+          last_name: {
+            label: 'Last name',
+            sortable: true
+          },
+          personal_no: {
+            label: 'Personal number',
+            sortable: true
+          }
+      },
       newSewadal: {
-        personalNumber: '',
-        firstName: '',
-        middleName: '',
-        lastName: '',
+        personal_no: '',
+        first_name: '',
+        middle_name: '',
+        last_name: '',
         gender: '',
         dob: '',
         type: '',
@@ -96,7 +110,7 @@ export default {
   computed: {
     validation() {
       return {
-        firstName: !!this.newSewadal.firstName.trim(),
+        first_name: !!this.newSewadal.first_name.trim(),
         emailID: emailRE.test(this.newSewadal.emailID)
       }
     },
@@ -110,10 +124,10 @@ export default {
   methods: {
     addSewadal() {
       sewadalsRef.push(this.newSewadal);
-      this.newSewadal.personalNumber = '';
-      this.newSewadal.firstName = '';
-      this.newSewadal.middleName = '';
-      this.newSewadal.lastName = '';
+      this.newSewadal.personal_no = '';
+      this.newSewadal.first_name = '';
+      this.newSewadal.middle_name = '';
+      this.newSewadal.last_name = '';
       this.newSewadal.gender = '';
       this.newSewadal.dob = '';
       this.newSewadal.type = '';
@@ -127,17 +141,3 @@ export default {
   },
 };
 </script>
-
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  color: #2c3e50;
-  margin-top: 20px;
-}
-/* Import Bootstrap Vue Styles */
-  @import '../node_modules/bootstrap/dist/css/bootstrap.css';
-  @import '../node_modules/bootstrap-vue/dist/bootstrap-vue.css';
-</style>

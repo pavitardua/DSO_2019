@@ -19,6 +19,7 @@
     "firebase": "^5.8.6",
     "toastr": "^2.1.4",
     "vue": "^2.6.8",
+    "vue-moment": "^4.0.0",
     "vue-router": "^3.0.1",
     "vuefire": "^1.4.5"
   },
