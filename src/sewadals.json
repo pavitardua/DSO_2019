@@ -1,0 +1,26 @@
+{
+    "sewadals": [
+        {
+            "personalNumber": 350,
+            "firstName": "Pavitar",
+            "middleName": "Rajinder Singh",
+            "lastName": "Dua",
+            "dob": "30-01-1990",
+            "gender": "M",
+            "type": "GS",
+            "emailID": "pavitar.dua@gmail.com",
+            "contactNumber": "+919870422692"
+        },
+        {
+            "personalNumber": 348,
+            "firstName": "Ramdular",
+            "middleName": "Rambharan",
+            "lastName": "Pal",
+            "dob": "01-09-1989",
+            "gender": "M",
+            "type": "GS",
+            "emailID": "rpal@gmail.com",
+            "contactNumber": "+91999887654"
+        }
+    ]
+}
